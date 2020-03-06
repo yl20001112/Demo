@@ -1,0 +1,27 @@
+server:
+  port: 9001  #端口号;
+spring:
+  application:
+    name: gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.com:6001/eureka/
+
+zuul:
+  routes:
+    USERS-PROVIDER: /provider/*
+    USERS-CONSUMER: /consumer/*
+  prefix: /gateway
+  #ignored-services: '*'            #禁用服务。
+  #ignored-patterns: /**/load/**    #禁用谋路径。
+  sensitive-headers: '*'            #解决走网关session变化。
+
+#网关超时异常
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000

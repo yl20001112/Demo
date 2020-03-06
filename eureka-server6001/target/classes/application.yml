@@ -1,0 +1,14 @@
+server:
+  port: 6001
+eureka:
+  instance:
+    hostname: eureka1.com
+  server:
+    enable-self-preservation: false       #禁用保护,默认true;
+    eviction-interval-timer-in-ms: 5000   #清理间隔（默认是60*1000）;
+  client:
+    service-url:
+      #defaultZone: http://eureka2.com:6002/eureka/    #单机,#集群互相指向;集群互相指向，除了自己之外的其它注册中心;
+      defaultZone: http://eureka1.com:6001/eureka/
+    register-with-eureka: false                     #单机false,默认true;
+    fetch-registry: false                           #单机false,默认true;
